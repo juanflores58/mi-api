@@ -1,21 +1,21 @@
-Nombre,Tipo,Raza,Edad (años),Peso (kg)
-Max,Perro,Labrador Retriever,3,30.0
-Luna,Gato,Siamés,2,4.5
-Rocky,Perro,Bulldog Francés,5,12.0
-Kira,Otro,Conejo Enano,1,1.2
-Simba,Gato,Persa,4,5.8
-Toby,Perro,Golden Retriever,6,32.0
-Nala,Gato,Bengalí,3,5.0
-Coco,Perro,Chihuahua,2,2.5
-Pelusa,Otro,Hámster Sirio,1,0.1
-Thor,Perro,Pastor Alemán,7,38.0
-Misha,Gato,Azul Ruso,4,4.2
-Bruno,Perro,Boxer,5,28.0
-Sasha,Otro,Cobaya,2,1.0
-Oreo,Gato,Maine Coon,6,6.5
-Zeus,Perro,Rottweiler,4,45.0
-Canela,Gato,Angora Turco,3,4.8
-Milo,Perro,Beagle,3,10.0
-Duna,Otro,Tortuga de tierra,10,3.5
-Bella,Gato,Esfinge,2,3.9
-Tango,Perro,Cocker Spaniel,5,14.0
+nombre,tipo,raza,fecha_nac,peso
+Max,Perro,Labrador Retriever,2013/05/12,30.0
+Luna,Gato,Siamés,2013/05/12,4.5
+Rocky,Perro,Bulldog Francés,2013/05/12,12.0
+Kira,Otro,Conejo Enano,2013/05/12,1.2
+Simba,Gato,Persa,2013/05/12,5.8
+Toby,Perro,Golden Retriever,2013/05/12,32.0
+Nala,Gato,Bengalí,2013/05/12,5.0
+Coco,Perro,Chihuahua,2013/05/12,2.5
+Pelusa,Otro,Hámster Sirio,2013/05/12,0.1
+Thor,Perro,Pastor Alemán,2013/05/12,38.0
+Misha,Gato,Azul Ruso,2013/05/12,4.2
+Bruno,Perro,Boxer,2013/05/12,28.0
+Sasha,Otro,Cobaya,2013/05/12,1.0
+Oreo,Gato,Maine Coon,2013/05/12,6.5
+Zeus,Perro,Rottweiler,2013/05/12,45.0
+Canela,Gato,Angora Turco,2013/05/12,4.8
+Milo,Perro,Beagle,2013/05/12,10.0
+Duna,Otro,Tortuga de tierra,2013/05/12,3.5
+Bella,Gato,Esfinge,2013/05/12,3.9
+Tango,Perro,Cocker Spaniel,2013/05/12,14.0
