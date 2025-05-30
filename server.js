@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const usuariosRoutes = require('./routes/usuarios');
 const mascotasRoutes = require('./routes/mascotas');
+const bookingRoutes = require('./routes/booking');
+const airbnbRoutes = require('./routes/airbnb');
 
 dotenv.config();
 
@@ -18,6 +20,8 @@ mongoose.connect(process.env.MONGODB_URI, {
 
 app.use('/api/usuarios', usuariosRoutes);
 app.use('/api/mascotas', mascotasRoutes);
+app.use('/booking', bookingRoutes);
+app.use('/airbnb', airbnbRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
