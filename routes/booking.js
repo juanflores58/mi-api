@@ -2,11 +2,12 @@ const express = require('express');
 const router = express.Router();
 const Booking = require('../models/Booking');
 
+// Crear una nueva reserva
 router.post('/', async (req, res) => {
   try {
-    const nuevaReserva = new Booking(req.body);
-    await nuevaReserva.save();
-    res.status(201).json(nuevaReserva);
+    const booking = new Booking(req.body);
+    const resultado = await booking.save();
+    res.status(201).json(resultado);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
@@ -15,10 +16,41 @@ router.post('/', async (req, res) => {
 // Obtener todas las reservas
 router.get('/', async (req, res) => {
   try {
-    const reservas = await Booking.find();
+    const reservas = await Booking.find().populate('usuario'); // ajusta el populate segÃºn tu modelo
     res.json(reservas);
   } catch (error) {
     res.status(500).json({ error: error.message });
+  }
+});
+
+// Obtener una reserva por ID
+router.get('/:id', async (req, res) => {
+  try {
+    const reserva = await Booking.findById(req.params.id).populate('usuario');
+    if (!reserva) return res.status(404).json({ error: 'Reserva no encontrada' });
+    res.json(reserva);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
+// Actualizar una reserva
+router.put('/:id', async (req, res) => {
+  try {
+    const reserva = await Booking.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    res.json(reserva);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
+// Eliminar una reserva
+router.delete('/:id', async (req, res) => {
+  try {
+    await Booking.findByIdAndDelete(req.params.id);
+    res.json({ mensaje: 'Reserva eliminada' });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
   }
 });
 
