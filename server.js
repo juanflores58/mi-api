@@ -10,6 +10,10 @@ dotenv.config();
 
 const app = express();
 app.use(express.json());
+// En tu archivo principal (e.g. index.js o app.js)
+const cors = require('cors');
+app.use(cors());
+
 
 mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
@@ -23,7 +27,7 @@ app.use('/api/mascotas', mascotasRoutes);
 app.use('/booking', bookingRoutes);
 app.use('/airbnb', airbnbRoutes);
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`🚀 Servidor corriendo en puerto ${PORT}`);
 });

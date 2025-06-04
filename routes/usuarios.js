@@ -12,6 +12,43 @@ router.post('/', async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 });
+// Ruta para login
+router.post('/login', async (req, res) => {
+  try {
+    const { correo, contraseña } = req.body;
+
+    if (!correo || !contraseña) {
+      return res.status(400).json({ error: 'Correo y contraseña son requeridos' });
+    }
+
+    // Buscar usuario por correo
+    const usuario = await Usuario.findOne({ correo });
+
+    if (!usuario) {
+      return res.status(401).json({ error: 'Usuario o contraseña incorrectos' });
+    }
+
+    // Verificar contraseña (en texto plano, no recomendado para producción)
+    if (usuario.contraseña !== contraseña) {
+      return res.status(401).json({ error: 'Usuario o contraseña incorrectos' });
+    }
+
+    // Login exitoso, puedes enviar lo que quieras (token, usuario, etc.)
+    res.json({
+      mensaje: 'Login exitoso',
+      usuario: {
+        id: usuario._id,
+        nombre: usuario.nombre,
+        correo: usuario.correo,
+        // No enviar contraseña
+      }
+    });
+
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 
 // Obtener todos los usuarios
 router.get('/', async (req, res) => {
