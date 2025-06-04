@@ -38,7 +38,7 @@ router.post('/login', async (req, res) => {
       mensaje: 'Login exitoso',
       usuario: {
         id: usuario._id,
-        nombre: usuario.nombre,
+        nombre: usuario.nombres,
         correo: usuario.correo,
         // No enviar contraseña
       }
