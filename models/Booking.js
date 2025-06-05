@@ -6,6 +6,7 @@ const bookingSchema = new mongoose.Schema({
   hora: String,
   precio: Number,
   diasEstadia: Number,
+  idUser: String,
   nombreUsuario: String,
   direccion: String
 });

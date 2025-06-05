@@ -18,6 +18,14 @@ router.get('/', async (req, res) => {
   const mascotas = await Mascota.find().populate('usuario');
   res.json(mascotas);
 });
+router.get('/usuario/:usuarioId', async (req, res) => {
+  try {
+    const mascotas = await Mascota.find({ usuario: req.params.usuarioId });
+    res.json(mascotas);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
 
 // Obtener mascota por ID
 router.get('/:id', async (req, res) => {
