@@ -14,14 +14,27 @@ router.post('/', async (req, res) => {
 });
 
 // Obtener todos los lugares
+// Obtener todos los lugares
 router.get('/', async (req, res) => {
   try {
-    const lugares = await Airbnb.find().populate('usuario'); // ajusta si tienes relaciones
+    const lugares = await Airbnb.find(); // sin populate
     res.json(lugares);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 });
+
+// Obtener un lugar por ID
+router.get('/:id', async (req, res) => {
+  try {
+    const lugar = await Airbnb.findById(req.params.id); // sin populate
+    if (!lugar) return res.status(404).json({ error: 'Lugar no encontrado' });
+    res.json(lugar);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
 
 // Obtener un lugar por ID
 router.get('/:id', async (req, res) => {

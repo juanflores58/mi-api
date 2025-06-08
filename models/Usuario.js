@@ -6,7 +6,8 @@ const usuarioSchema = new mongoose.Schema({
   apellido2: String,
   correo: { type: String, required: true, unique: true },
   fechaNacimiento: { type: Date, required: true },
-  contraseña: { type: String, required: true }
+  contraseña: { type: String, required: true },
+  celular: { type: String } // nuevo campo
 });
 
 module.exports = mongoose.model('Usuario', usuarioSchema);

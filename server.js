@@ -10,7 +10,6 @@ dotenv.config();
 
 const app = express();
 app.use(express.json());
-// En tu archivo principal (e.g. index.js o app.js)
 const cors = require('cors');
 app.use(cors());
 
@@ -18,9 +17,7 @@ app.use(cors());
 mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-})
-.then(() => console.log('✅ Conectado a MongoDB'))
-.catch(err => console.error('❌ Error conectando a MongoDB:', err));
+}).then(() => console.log('✅ Conectado a MongoDB')).catch(err => console.error('❌ Error conectando a MongoDB:', err));
 
 app.use('/api/usuarios', usuariosRoutes);
 app.use('/api/mascotas', mascotasRoutes);
