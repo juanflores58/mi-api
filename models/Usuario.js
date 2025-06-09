@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const usuarioSchema = new mongoose.Schema({
   nombres: { type: String, required: true },
@@ -10,4 +10,6 @@ const usuarioSchema = new mongoose.Schema({
   celular: { type: String } // nuevo campo
 });
 
-module.exports = mongoose.model('Usuario', usuarioSchema);
+const Usuario = mongoose.model('Usuario', usuarioSchema);
+
+export default Usuario ;
