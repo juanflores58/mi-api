@@ -1,8 +1,32 @@
-const express = require('express');
-const router = express.Router();
-const Usuario = require('../models/Usuario');
+import { Router } from 'express';
+import Usuario from '../models/Usuario.js';
 
-// Crear usuario
+const router = Router();
+
+/**
+ * @swagger
+ * /usuarios:
+ *   post:
+ *     summary: Crea un nuevo usuario
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               nombres:
+ *                 type: string
+ *               correo:
+ *                 type: string
+ *               contraseña:
+ *                 type: string
+ *     responses:
+ *       201:
+ *         description: Usuario creado exitosamente
+ *       400:
+ *         description: Error al crear usuario
+ */
 router.post('/', async (req, res) => {
   try {
     const usuario = new Usuario(req.body);
@@ -12,51 +36,91 @@ router.post('/', async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 });
-// Ruta para login
+
+/**
+ * @swagger
+ * /usuarios/login:
+ *   post:
+ *     summary: Inicia sesión con correo y contraseña
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               correo:
+ *                 type: string
+ *               contraseña:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Login exitoso
+ *       400:
+ *         description: Datos incompletos
+ *       401:
+ *         description: Usuario o contraseña incorrectos
+ *       500:
+ *         description: Error del servidor
+ */
 router.post('/login', async (req, res) => {
   try {
     const { correo, contraseña } = req.body;
-
     if (!correo || !contraseña) {
       return res.status(400).json({ error: 'Correo y contraseña son requeridos' });
     }
 
-    // Buscar usuario por correo
     const usuario = await Usuario.findOne({ correo });
-
-    if (!usuario) {
+    if (!usuario || usuario.contraseña !== contraseña) {
       return res.status(401).json({ error: 'Usuario o contraseña incorrectos' });
     }
 
-    // Verificar contraseña (en texto plano, no recomendado para producción)
-    if (usuario.contraseña !== contraseña) {
-      return res.status(401).json({ error: 'Usuario o contraseña incorrectos' });
-    }
-
-    // Login exitoso, puedes enviar lo que quieras (token, usuario, etc.)
     res.json({
       mensaje: 'Login exitoso',
       usuario: {
         id: usuario._id,
         nombre: usuario.nombres,
         correo: usuario.correo,
-        // No enviar contraseña
       }
     });
-
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 });
 
-
-// Obtener todos los usuarios
+/**
+ * @swagger
+ * /usuarios:
+ *   get:
+ *     summary: Obtiene todos los usuarios
+ *     responses:
+ *       200:
+ *         description: Lista de usuarios
+ */
 router.get('/', async (req, res) => {
   const usuarios = await Usuario.find();
   res.json(usuarios);
 });
 
-// Obtener un usuario por ID
+/**
+ * @swagger
+ * /usuarios/{id}:
+ *   get:
+ *     summary: Obtiene un usuario por ID
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Usuario encontrado
+ *       404:
+ *         description: Usuario no encontrado
+ *       400:
+ *         description: ID inválido
+ */
 router.get('/:id', async (req, res) => {
   try {
     const usuario = await Usuario.findById(req.params.id);
@@ -67,7 +131,29 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// Actualizar usuario
+/**
+ * @swagger
+ * /usuarios/{id}:
+ *   put:
+ *     summary: Actualiza un usuario por ID
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *     responses:
+ *       200:
+ *         description: Usuario actualizado
+ *       400:
+ *         description: Error de validación o ID inválido
+ */
 router.put('/:id', async (req, res) => {
   try {
     const usuario = await Usuario.findByIdAndUpdate(req.params.id, req.body, { new: true });
@@ -77,7 +163,23 @@ router.put('/:id', async (req, res) => {
   }
 });
 
-// Eliminar usuario
+/**
+ * @swagger
+ * /usuarios/{id}:
+ *   delete:
+ *     summary: Elimina un usuario por ID
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Usuario eliminado
+ *       400:
+ *         description: Error al eliminar usuario
+ */
 router.delete('/:id', async (req, res) => {
   try {
     await Usuario.findByIdAndDelete(req.params.id);
@@ -87,4 +189,4 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

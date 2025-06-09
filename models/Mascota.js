@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const mascotaSchema = new mongoose.Schema({
   nombre: { type: String, required: true },
@@ -10,4 +10,6 @@ const mascotaSchema = new mongoose.Schema({
   usuario: { type: mongoose.Schema.Types.ObjectId, ref: 'Usuario', required: true }
 });
 
-module.exports = mongoose.model('Mascota', mascotaSchema);
+const Mascota = mongoose.model('Mascota', mascotaSchema);
+
+export default Mascota;
