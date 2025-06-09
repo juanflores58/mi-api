@@ -16,17 +16,29 @@ router.post('/', async (req, res) => {
 // Obtener todas las reservas
 router.get('/', async (req, res) => {
   try {
-    const reservas = await Booking.find().populate('usuario'); // ajusta el populate segÃºn tu modelo
+    const reservas = await Booking.find(); // sin populate
     res.json(reservas);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 });
 
+// Obtener reservas por nombre de usuario
+router.get('/user/:userName', async (req, res) => {
+  try {
+    const { userName } = req.params;
+    const reservas = await Booking.find({ userName: userName });
+    res.json(reservas);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+
 // Obtener una reserva por ID
 router.get('/:id', async (req, res) => {
   try {
-    const reserva = await Booking.findById(req.params.id).populate('usuario');
+    const reserva = await Booking.findById(req.params.id); // sin populate
     if (!reserva) return res.status(404).json({ error: 'Reserva no encontrada' });
     res.json(reserva);
   } catch (error) {

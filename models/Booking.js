@@ -8,7 +8,6 @@ const bookingSchema = new mongoose.Schema({
   diasEstadia: Number,
   idUser: String,
   nombreUsuario: String,
-  direccion: String
 });
 
 module.exports = mongoose.model('Booking', bookingSchema);
