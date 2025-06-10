@@ -16,14 +16,9 @@ import airbnbRoutes from './routes/airbnb.js';
 dotenv.config();
 
 const app = express();
-<<<<<<< HEAD
-app.use(express.json());
-const cors = require('cors');
-=======
 const PORT = process.env.PORT || 3001;
 
 // Middlewares
->>>>>>> 40d85a14371f2449ac2f3576ef5a90749972df62
 app.use(cors());
 app.use(express.json());
 
@@ -40,13 +35,9 @@ app.use('/api/airbnb', airbnbRoutes);
 mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-<<<<<<< HEAD
-}).then(() => console.log('✅ Conectado a MongoDB')).catch(err => console.error('❌ Error conectando a MongoDB:', err));
-=======
 })
 .then(() => console.log('✅ Conectado a MongoDB'))
 .catch((error) => console.error('❌ Error al conectar a MongoDB:', error));
->>>>>>> 40d85a14371f2449ac2f3576ef5a90749972df62
 
 // Iniciar el servidor
 app.listen(PORT, '0.0.0.0', () => {

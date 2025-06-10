@@ -57,18 +57,13 @@ router.post('/', async (req, res) => {
  */
 router.get('/', async (req, res) => {
   try {
-<<<<<<< HEAD
     const reservas = await Booking.find(); // sin populate
-=======
-    const reservas = await Booking.find().populate('usuario');
->>>>>>> 40d85a14371f2449ac2f3576ef5a90749972df62
     res.json(reservas);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 });
 
-<<<<<<< HEAD
 // Obtener reservas por nombre de usuario
 router.get('/user/:userName', async (req, res) => {
   try {
@@ -82,7 +77,6 @@ router.get('/user/:userName', async (req, res) => {
 
 
 // Obtener una reserva por ID
-=======
 /**
  * @swagger
  * /api/booking/{id}:
@@ -104,7 +98,6 @@ router.get('/user/:userName', async (req, res) => {
  *       400:
  *         description: Error al buscar la reserva
  */
->>>>>>> 40d85a14371f2449ac2f3576ef5a90749972df62
 router.get('/:id', async (req, res) => {
   try {
     const reserva = await Booking.findById(req.params.id); // sin populate
@@ -180,8 +173,4 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
-<<<<<<< HEAD
 module.exports = router;
-=======
-export default router;
->>>>>>> 40d85a14371f2449ac2f3576ef5a90749972df62

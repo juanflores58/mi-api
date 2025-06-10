@@ -44,13 +44,6 @@ router.post('/', async (req, res) => {
   }
 });
 
-<<<<<<< HEAD
-// Obtener todos los lugares
-// Obtener todos los lugares
-router.get('/', async (req, res) => {
-  try {
-    const lugares = await Airbnb.find(); // sin populate
-=======
 /**
  * @swagger
  * /api/airbnb:
@@ -65,8 +58,7 @@ router.get('/', async (req, res) => {
  */
 router.get('/', async (req, res) => {
   try {
-    const lugares = await Airbnb.find().populate('usuario');
->>>>>>> 40d85a14371f2449ac2f3576ef5a90749972df62
+    const lugares = await Airbnb.find();
     res.json(lugares);
   } catch (error) {
     res.status(500).json({ error: error.message });
